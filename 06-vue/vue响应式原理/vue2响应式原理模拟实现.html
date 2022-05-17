@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* CSS书写顺序：位置定位、大小边距、文字系列、边框背景、其他CSS3等 */
+    
+    #app {
+      display: inline-block;
+      padding: 20px;
+      color: aliceblue;
+      background-color: green;
+      border: 1px solid #ccc;
+    }
+    
+    input {
+      font-size: 40px;
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" value="">
+  </div>
+
+
+  <script>
+    let oldArrProto = Array.prototype
+    let newArrProto = Object.create(oldArrProto);
+    ['push', 'unshift', 'pop', 'unshift', 'reduce', 'splice', 'slice', 'concat'].forEach(methodName => {
+      newArrProto[methodName] = function() {
+        updateView()
+        return oldArrProto[methodName].call(this, ...arguments)
+      }
+    })
+
+
+    function updateView() {
+      console.log('更新视图');
+    }
+
+    function observe(target) {
+      // 把target中的所有数据加入响应式系统
+      if (typeof target !== 'object' || target === null) return target
+
+      // 判断数组
+      if (Array.isArray(target)) Object.setPrototypeOf(target, newArrProto)
+      for (let key in target) {
+        if (typeof target[key] === 'object') observe(target[key])
+          // 单个对象响应式具体实现
+        defineReactive(target, key, target[key])
+      }
+    }
+
+    function defineReactive(obj, key, value) {
+      // 如果不传value
+      value = value || obj[key]
+      Object.defineProperty(obj, key, {
+        enumerable: true,
+        configurable: true,
+        get() {
+          return value
+        },
+        set(newValue) {
+          if (newValue !== value) {
+            value = newValue
+
+            // 把新设置的值也加入响应式系统
+            observe(value)
+
+            // 更新视图
+            // updateView()
+            document.getElementById('app').children[0].value = value
+          }
+        }
+      })
+    }
+
+
+    const app = document.getElementById('app')
+
+    let data = {
+      name: '崔帆',
+      age: 21,
+      friend: {
+        friendName: 'simon'
+      },
+      colors: ['red', 'blue', 'black']
+    }
+
+    app.children[0].value = "hello"
+    observe(data)
+
+    // data.name = 'cuifan'
+    // data.friend.friendName = '崔帆'
+    // data.age = {
+    //   number: 21
+    // }
+    // data.age.number++
+    // data.colors[0] = 'bbb'
+    // data.colors.push('aaa')
+    data.name = '王五'
+
+    app.children[0].addEventListener('input', function() {
+      data.name = this.value
+      console.log(data);
+    })
+  </script>
+</body>
+
+</html>

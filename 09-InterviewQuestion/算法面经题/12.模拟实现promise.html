@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 分两种情况：1.先指定回调，后状态改变 2.先改变状态，再指定回调（需要一个数组存储回调函数）
+
+    class MyPromise {
+      constructor(excutor) {
+        this.promiseStatus = 'pending' // 记录对象的状态
+        this.promiseResult = undefined // 记录状态的值
+        this.promiseCallbacks = [] // 第二种情况：存储回调
+
+        const self = this
+
+        function _resolve(value) {
+          // 修改状态(状态只能改变一次，随后就不能再变)
+          if (self.status !== 'pending') return
+
+          self.promiseStatus = 'fulfilled'
+          self.promiseResult = value
+        }
+
+        function _reject(value) {
+          // 修改状态
+          if (self.status !== 'pending') return
+
+          self.promiseStatus = 'rejected'
+          self.promiseResult = value
+        }
+
+        // 立即执行创建promise对象传入的函数
+        excutor(_resolve, _reject)
+      }
+
+      then(onResolved, onRejected) {
+        if (this.promiseStatus === 'fulfilled') {
+          onResolved(this.promiseResult)
+        } else if (this.promiseStatus === 'rejected') {
+          onRejected(this.promiseResult)
+        } else {
+          // 先指定回调
+
+        }
+      }
+    }
+
+    let p1 = new MyPromise((resolve, reject) => {
+      resolve(1)
+    })
+  </script>
+</body>
+
+</html>

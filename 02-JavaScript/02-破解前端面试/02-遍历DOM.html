@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="root">
+    <div class="container">
+      <section class="sidebar">
+        <ul class="menu"></ul>
+      </section>
+      <section class="main">
+        <article class="post"></article>
+        <p class="copyright"></p>
+      </section>
+    </div>
+  </div>
+</body>
+<script>
+  class Queue {
+    constructor() {
+      this.items = []
+    }
+
+    // 1.在队列末尾添加新的值
+    enqueue(element) {
+      this.items[this.items.length] = element
+    }
+
+    // 2.元素出列
+    dequeue() {
+      let temp = this.items[0]
+      this.items.forEach((item, index, array) => {
+        array[index] = array[index + 1]
+      })
+      this.items.length--
+        return temp
+    }
+
+    // 3.查看前端的元素
+    front() {
+      return this.items[0]
+    }
+
+    // 4.查看队列是否为空
+    isEmpty() {
+      return this.items.length <= 0
+    }
+
+    // 5.查看队列中元素的个数
+    size() {
+      return this.items.length
+    }
+
+  }
+
+  function handle(node) {
+    console.log(node.className);
+  }
+
+  let root = document.body.children[0]
+    // let queue = new Queue()
+    // queue.enqueue(root)
+    // root.color = 'black' // 添加标志,进入过队列的结点设置color属性为black
+    // while (!queue.isEmpty()) {
+    //   // 从队列中取出一个结点
+    //   let node = queue.dequeue()
+
+  //   // 处理该结点
+  //   handle(node)
+
+  //   // 把该结点所有没有被标记过的子结点添加到队列
+  //   for (let i = 0; i < node.children.length; i++) {
+  //     if (node.children[i].color != 'black') {
+  //       queue.enqueue(node.children[i])
+  //       node.children[i].color = 'black'
+  //     }
+  //   }
+  // }
+
+
+  // function nodeVisit(node) {
+  //   // 访问该结点
+  //   handle(node)
+
+  //   // 把该结点设置为黑色
+  //   node.color = 'black'
+
+  //   // 递归访问该结点所有的没有变黑的子节点
+  //   for (let i = 0; i < node.children.length; i++) {
+  //     if (node.children[i].color !== 'black') nodeVisit(node.children[i])
+  //   }
+  // }
+
+  // nodeVisit(root)
+</script>
+
+</html>

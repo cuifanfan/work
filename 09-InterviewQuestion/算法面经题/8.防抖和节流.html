@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button class="cuifan">点我</button>
+  <!-- 防抖：触发高频事件n秒内只会执行一次，如果n秒内再次被触发，则重新计算时间 -->
+
+  <script>
+    function debounce(fn, timeout) {
+      // 防抖的实现原理：每次执行函数n秒内只会触发一次，如果n秒内再次触发，就刷新时间。
+      let timer = null // 记录定时器
+      timeout = timeout || 500
+      return function() {
+        clearTimeout(timer)
+        const context = this
+        timer = setTimeout(() => {
+          fn.call(context, ...arguments)
+        }, timeout)
+      }
+
+    }
+
+    function sayHi() {
+      console.log('防抖');
+      console.log(this.className);
+    }
+
+
+    // document.getElementsByClassName('cuifan')[0].addEventListener('click', debounce(sayHi, 500))
+
+    // 防抖应用场景：
+    // 1.search触发联想，在用户不断输入值的时候，使用防抖来节省资源。
+    // 2.Window触发resize的时候，不断调整整个窗口的大小会不停地触发这个事件，用防抖来确保只触发一次
+
+    // 节流：
+    // 高频事件触发， 但是n秒内只会执行一次。 所以节流会稀释函数的执行效率。
+
+    function throttle(fn, timeout) {
+      let flag = true // 通过闭包保存一个标记
+      timeout = timeout || 500
+      return function() {
+        // 当前定时器还没到期
+        if (!flag) return
+        const context = this
+        setTimeout(() => {
+          fn.call(context, ...arguments)
+          flag = true
+        }, timeout)
+        flag = false
+      }
+    }
+
+    function sayHello() {
+      console.log('节流');
+      console.log(this.className);
+    }
+
+    document.getElementsByClassName('cuifan')[0].addEventListener('click', throttle(sayHello, 5000))
+
+    // 节流使用场景：鼠标不断移动点击触发，单位时间内只触发一次。
+    // 监听滚动事件，懒加载
+  </script>
+</body>
+
+</html>

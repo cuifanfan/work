@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <div class="box1">
+    <div class="box2">
+      <div class="box3">
+        <div class="box4"></div>
+      </div>
+    </div>
+    <div class="box5"></div>
+    <div class="box6">
+      <div class="box7"></div>
+    </div>
+  </div>
+  <script>
+    function bfs(root, callback) {
+      let arr = []
+      arr.push(root)
+      root.color = 'black' // 加入后添加属性
+
+      while (arr.length) {
+        let element = arr.shift()
+        for (let i = 0; i < element.children.length; i++) {
+          let child = element.children[i]
+          if (child.color !== 'black') {
+            arr.push(child)
+            child.color = 'black'
+          }
+        }
+        callback && callback(element)
+      }
+    }
+
+    function dfs(element, callback) {
+      callback && callback(element)
+
+      for (let i = 0; i < element.children.length; i++) {
+        dfs(element.children[i], callback)
+      }
+
+    }
+
+    // bfs(document.body.firstElementChild, (element) => {
+    //   console.log(element.className);
+    // })
+
+    dfs(document.body.firstElementChild, (element) => {
+      console.log(element.className);
+    })
+  </script>
+</body>
+
+</html>

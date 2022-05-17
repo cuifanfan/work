@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1">
+  <title>debounce</title>
+  <style>
+    #container {
+      width: 100%;
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      color: #fff;
+      background-color: #444;
+      font-size: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 系列文章链接：https://juejin.cn/post/6844903506017517582 -->
+  <div id="container"></div>
+  <script>
+    // 防抖的实现：
+    // 尽管触发事件、我一定在事件出发的n秒后才执行回调。如果你在一个事件出发的n秒内又触发了这个事件，那我就以新的事件的时间为准，n秒后才执行回调函数
+    let container = document.querySelector('#container')
+    let count = 0
+
+    function getUserAction() {
+      container.innerHTML = count++
+    }
+
+    function debounce(func, wait, immediate) {
+      // immediate:第一次触发是否立即执行
+      let timeout // 用于记录是否在间隔时间内重复触发事件
+      let result // 回调getUserAction的返回值(immediate为false的情况回调是异步执行的，拿不到结果。所以这里仅仅返回result的值)
+      let debounced = function() {
+        //  解决回调中this指向和event对象的问题
+        let context = this
+        let args = arguments
+
+        if (timeout) clearTimeout(timeout)
+        if (immediate) {
+          // 判断是否为第一次触发
+          if (!timeout) {
+            func.apply(context, args)
+          }
+          // 其余次触发就更新回调，在wait ms后再第一次触发立即执行
+          timeout = setTimeout(function() {
+            timeout = null
+          }, wait)
+
+        } else {
+          timeout = setTimeout(function() {
+            func.apply(context, args)
+          }, wait)
+        }
+      }
+
+      debounced.cancel = function() {
+        clearTimeout(timeout)
+        timeout = null
+      }
+
+      return debounced
+    }
+
+    container.onmousemove = debounce(getUserAction, 1000, true)
+  </script>
+
+</body>
+
+</html>

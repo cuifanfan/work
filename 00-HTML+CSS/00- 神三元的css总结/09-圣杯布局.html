@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .header,
+    .footer {
+      height: 60px;
+      background-color: red;
+    }
+    
+    .center>div {
+      height: 40px;
+    }
+    
+    .left {
+      width: 200px;
+      background-color: pink;
+    }
+    
+    .center {
+      display: flex;
+    }
+    
+    .middle {
+      flex: 1;
+      background-color: yellow;
+    }
+    
+    .right {
+      width: 249px;
+      background-color: skyblue;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">头部</div>
+  <div class="center">
+    <div class="left">左边</div>
+    <div class="middle">中间</div>
+    <div class="right">右边</div>
+  </div>
+  <div class="footer">尾部</div>
+</body>
+
+</html>

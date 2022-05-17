@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    .box {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      width: 400px;
+      height: 400px;
+      /* font-size: 0;
+      text-align: center; */
+      border: 1px solid #ccc;
+    }
+    /* .box::after {
+      display: inline-block;
+      width: 0;
+      padding-bottom: 100%;
+      content: '';
+      vertical-align: middle;
+      visibility: hidden;
+    } */
+    
+    .center {
+      /* display: inline-block; */
+      width: 100px;
+      height: 100px;
+      margin: auto;
+      background-color: red;
+      /* vertical-align: middle; */
+    }
+    
+    button {
+      width: 400px;
+      height: 400px;
+      margin: 0;
+      padding: 0;
+      border: 1px solid #ccc;
+      background-color: transparent;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 文章链接：https://juejin.cn/post/6844903574929932301 -->
+  <!-- 【水平居中】 -->
+  <!-- 1. 行内(块)元素:text-align:center; -->
+  <!-- 2. 块级元素： -->
+  <!-- >> 2.1 宽度已知:margin: 0 auto; 绝对定位+margin-left:-width/2;
+  >> 2.2 宽度未知:    
+    (1)父元素使用flex布局 justify-content:center; 
+    (2)转换为行内块元素给父元素添加text-align:center;
+    (3)使用grid布局 justify-items:center;
+    (4)使用table布局 text-align:center;
+    (5)使用绝对定位+transform:translateX(-50%); -->
+
+  <!-- 【垂直居中】 -->
+  <!-- 1. 行内(块)元素：父元素添加line-height:height;(只是近似居中) 真正居中需要给父元素添加font-size:0;同时子元素添加vertical-align:middle;-->
+  <!-- 2.块级元素：
+  (1)使用table布局 table-cell + vertical-align:middle;
+  (2)使用flex布局 align-items:center;
+  (3)使用grid布局 align-items:center;
+  (4)使用绝对定位 + margin-top:-height/2; 或者transform:translateY(-50%); -->
+
+  <!-- 【水平垂直居中】 -->
+  <!-- (1)转换为行内块元素使用line-height:height;text-align:center;(注意vertical-align:middle;和font-size:0;)
+  (2)button作为父元素
+  (3)使用table-cell设置vertical-align和text-align:center;
+  (4)绝对定位+margin/transform
+  (5)绝对定位+left/right/top/bottom设置为0同时设置margin：auto;
+  (6)flex布局
+  (7)grid布局
+  (8)视窗+transform -->
+
+  <div class="box">
+    <div class="center">
+    </div>
+  </div>
+  <button>
+    <div class="center"></div>
+  </button>
+</body>
+
+</html>

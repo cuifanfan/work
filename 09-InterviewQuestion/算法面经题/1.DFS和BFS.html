@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box1">
+    <div class="box2">
+      <div class="box3"></div>
+      <div class="box4">
+        <div class="box5">
+          <div class="box6"></div>
+          <div class="box7">
+            <div class="box8">
+              <div class="box9">
+                <div class="box10"></div>
+              </div>
+              <div class="box11"></div>
+              <div class="box12"></div>
+            </div>
+            <div class="box13"></div>
+          </div>
+        </div>
+        <div class="box14"></div>
+      </div>
+      <div class="box15">
+        <div class="box16"></div>
+      </div>
+    </div>
+    <div class="box17">
+      <div class="box18"></div>
+      <div class="box19"></div>
+    </div>
+    <div class="box20"></div>
+  </div>
+  <div class="box21"></div>
+  <script>
+    // function handle(className) {
+    //   console.log(className);
+    // }
+    // // BFS
+    // let div = document.querySelector('div')
+
+    // let queue = [div]
+    // div.color = 'black'
+    // while (queue.length) {
+    //   let queueItem = queue.pop()
+    //   handle(queueItem.className)
+
+    //   for (let i = 0; i < queueItem.children.length; i++) {
+    //     if (queueItem.children[i].color !== 'black') {
+    //       queue.unshift(queueItem.children[i])
+    //       queueItem.children[i].color = 'black'
+    //     }
+    //   }
+    // }
+
+    // DFS
+    // function dfs(node) {
+    //   if (node) {
+    //     handle(node.className)
+    //     for (let i = 0; i < node.children.length; i++) {
+    //       dfs(node.children[i])
+    //     }
+    //   }
+    // }
+    // dfs(div)
+
+    // 非递归：借助栈
+    // function dfs(node) {
+    //   let stack = [node]
+    //   while (stack.length) {
+
+    //     let stackItem = stack.pop()
+
+    //     // 访问该结点
+    //     handle(stackItem.className)
+
+    //     // 下次从栈中取出结点的顺序应该是和递归一样的
+    //     for (let i = stackItem.children.length - 1; i >= 0; i--) {
+    //       stack.push(stackItem.children[i])
+    //     }
+    //   }
+    // }
+
+    // dfs(div)
+  </script>
+</body>
+
+</html>

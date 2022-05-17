@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .fz {
+      font-size: 30px;
+    }
+    
+    .red {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <a :href="href" :style="{'fontSize':'30px'}">点我</a>
+    <button @click="changeUrl">切换到github</button> -->
+    <div v-text="computedValue"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+
+      data: {
+        href: 'http://www.baidu.com',
+        // styleClasses: ['fz', 'red']
+        // styleClasses: {
+        //   'fz': true,
+        //   'red': true
+        // }
+        a: 10,
+      },
+
+      methods: {
+        changeUrl() {
+          this.href = 'https://codetop.cc/home'
+        }
+      },
+      // 计算属性会进行缓存，当多次使用的时候，只会计算一次。而使用method每次都要计算
+      computed: {
+        computedValue: {
+          get() {
+            return this.a
+          },
+          set(value) {
+            this.a = value
+          },
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

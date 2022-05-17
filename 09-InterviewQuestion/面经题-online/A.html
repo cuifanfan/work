@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>42度空间-从www.42du.cn接收消息</title>
+</head>
+
+<body>
+  <div id="message">
+    Hello World!
+  </div>
+  <script>
+    window.onload = function() {
+      var messageEle = document.getElementById('message');
+      window.addEventListener('message', function(e) {
+        alert(e.origin);
+        if (e.origin !== "http://www.42du.cn") {
+          return;
+        }
+        messageEle.innerHTML = "从" + e.origin + "收到消息： " + e.data;
+      });
+    }
+  </script>
+</body>
+
+</html>

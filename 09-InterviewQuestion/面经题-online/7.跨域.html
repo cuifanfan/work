@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function jsonp({
+      url,
+      params,
+      callbackName
+    }) {
+
+      function generateURL(callbackName) {
+        let urlStr = ''
+        for (let key in params) {
+          urlStr += `${key}=${params[key]}&`
+        }
+        urlStr += `callback=${callbackName}`
+        return `${url}?${urlStr}`
+      }
+
+      return new Promise((resolve, reject) => {
+        // 回调的名称，要保持不一致性，防止重复
+        callbackName = callbackName || 'callback'
+        let script = document.createElement('script')
+        script.type = 'text/javascript'
+        script.src = generateURL(callbackName)
+        document.body.appendChild(script)
+        window[callbackName] = (data) => {
+          resolve(data)
+
+          // 执行完毕移除
+          document.body.removeChild(script)
+        }
+      })
+    }
+
+    jsonp({
+      url: 'http://localhost:3000',
+      params: {
+        userName: 'cuifan'
+      }
+    }).then(userInfo => {
+      console.log(userInfo);
+    })
+  </script>
+
+  <script>
+    // 可以配置nginx如下：
+    // 比如客户端为client.com,服务器为server.com
+    // server {
+    //   listen 80;
+    //   server_name client.com;
+    //   location /api {
+    //     proxy_pass server.com
+    //   }
+    // }
+  </script>
+
+  <script>
+    // 可以使用HTML5的postMessage方法，在A窗口中，向B窗口发送数据
+
+    // A中：
+    // Bwindow.postMessage('我是传输的数据', 'B的地址')
+
+    // B中：
+    // Awindow.addEventListener('message', function(event) {
+    //   console.log(event.origin);
+    //   console.log(event.source);
+    //   console.log(event.data);
+    // })
+  </script>
+
+  <script>
+    // WebSocket是一种HTML5的新协议，实现了客户端和服务器的全双工通信，同时还允许跨端通讯。是server push技术的一种很好实现
+  </script>
+
+  <script>
+  </script>
+</body>
+
+</html>

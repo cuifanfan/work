@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #container {
+      width: 100%;
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      color: #fff;
+      background-color: #444;
+      font-size: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+
+  <script>
+    let count = 0
+
+    function getUserAction() {
+      container.innerHTML = count++
+    }
+    let container = document.getElementById('container')
+
+    function throttle(func, wait) {
+      let previous = 0
+      return function() {
+        let now = +new Date()
+        let context = this
+        let args = arguments
+        if (now - previous > wait) {
+          func.apply(context, args)
+          previous = now
+        }
+      }
+    }
+
+    function throttle1(func, wait) {
+      let timeout // 记录定时器是否还在
+      return function() {
+        let context = this
+        let args = arguments
+        if (!timeout) {
+          timeout = setTimeout(function() {
+            func.apply(context, args)
+            timeout = null
+          }, wait)
+        }
+      }
+    }
+
+
+    function throttle2(func, wait) {
+      let previous = 0
+      let timeout = null // 记录定时器是否还在
+      let throttled = function() {
+        let context = this
+        let args = arguments
+
+        let now = +new Date()
+        let remaining = wait - (now - previous) // 还剩下的时间
+        if (remaining <= 0 || remaining > wait) {
+          // 如果没有剩余的时间（比如第一次执行 < 0）或者修改了系统时间
+          func.apply(context, args)
+          previous = now
+          if (timeout) {
+            // 定时器还在的话，应该刷新定时时间间隔了
+            clearTimeout(timeout)
+            timeout = null
+          }
+        } else {
+          if (!timeout) {
+            timeout = setTimeout(function() {
+              func.apply(context, args)
+              timeout = null
+              previous = +new Date()
+            }, remaining)
+          }
+        }
+      }
+      return throttled
+    }
+
+
+    function throttle3(func, wait, options) {
+      let previous = 0
+      let timeout = null // 记录定时器是否还在
+      if (!options) options = {}
+
+      let throttled = function() {
+        let context = this
+        let args = arguments
+
+        let now = +new Date()
+
+        // 不执行第一次
+        if (!previous && options.leading === false) previous = now
+
+        let remaining = wait - (now - previous) // 还剩下的时间
+        if (remaining <= 0 || remaining > wait) {
+          // 如果没有剩余的时间（比如第一次执行 < 0）或者修改了系统时间
+          func.apply(context, args)
+          previous = now
+          if (timeout) {
+            // 定时器还在的话，应该刷新定时时间间隔了
+            clearTimeout(timeout)
+            timeout = null
+          }
+        } else {
+          if (!timeout && options.trailing !== false) {
+            timeout = setTimeout(function() {
+              func.apply(context, args)
+              timeout = null
+              previous = +new Date()
+            }, remaining)
+          }
+        }
+      }
+
+      throttled.cancel = function() {
+        clearTimeout(timeout)
+        previous = 0
+        timeout = null
+      }
+
+      return throttled
+    }
+    container.onmousemove = throttle2(getUserAction, 1000)
+  </script>
+</body>
+
+</html>

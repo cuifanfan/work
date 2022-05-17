@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 实现前端路由，有两个核心：
+1.如何改变URL而不引起页面刷新？（改变location.hash）
+2.如何检测URL变化？ （）-->
+
+  <!-- hash实现：URL中的hash主要用于在页面内进行导航，改变URL中的hash部分不会引起页面刷新。（window.location.hash）,可以通过hashchange事件监听URL的变化 -->
+
+  <!-- 改变URL的方式只有：
+  （1）通过浏览器的前进后退改变URL
+  （2）通过a标签改变URL
+  （3）通过window.location改变URL -->
+
+  <div>
+    <ul>
+      <!-- 定义路由 -->
+      <li>
+        <!-- <a href="#/home">home</a>
+        <a href="#/about">about</a> -->
+        <a href="/home">home</a>
+        <a href="/about">about</a>
+      </li>
+    </ul>
+
+    <!-- 渲染路由对应的UI -->
+    <div id="routeView"></div>
+  </div>
+
+  <!-- 
+  history实现：
+  history提供了pushState和replaceState方法，这两个方法改变URL的path不会引起页面刷新
+
+  history 提供类似 hashchange 事件的 popstate 事件，但 popstate 事件有些不同：
+    1.通过浏览器前进后退改变 URL 时会触发 popstate 事件
+    2.通过pushState/replaceState或<a>标签改变 URL 不会触发 popstate 事件。好在我们可以拦截 pushState/replaceState的调用和<a>标签的点击事件来检测 URL 变化
+    3.通过js 调用history的back，go，forward方法课触发该事件 -->
+
+
+  <script>
+    let routerView = document.getElementById('routeView')
+
+    // 基于hash实现
+    // window.addEventListener('hashchange', () => {
+    //   let hash = window.location.hash
+    //   routerView.innerHTML = hash
+    // })
+
+    // window.addEventListener('DOMContentLoaded', () => {
+    //   if (!location.hash) {
+    //     // 如果不存在hash值，那么重定向到#/
+    //     window.location.hash = '/'
+    //   } else {
+    //     // 存在hash，渲染对应的UI
+    //     let hash = window.location.hash
+    //     routerView.innerHTML = hash
+    //   }
+    // })
+
+    // 基于history实现
+    window.addEventListener('DOMContentLoaded', onLoad)
+    window.addEventListener('popstate', () => {
+      routerView.innerHTML = window.location.pathname
+    })
+
+    function onLoad() {
+      routerView.innerHTML = window.location.pathname
+      let aList = document.querySelectorAll('a[href]')
+      aList.forEach(el => {
+        el.addEventListener('click', (e) => {
+          // 阻止默认行为跳转
+          e.preventDefault()
+          history.pushState({}, "", el.getAttribute('href'))
+          routerView.innerHTML = window.location.pathname
+        })
+      })
+    }
+  </script>
+</body>
+
+</html>

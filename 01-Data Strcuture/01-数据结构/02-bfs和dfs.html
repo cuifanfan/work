@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="0">
+    <div class="1">
+      <div class="2"></div>
+      <div class="3">
+        <div class="4">
+          <div class="5"></div>
+          <div class="6">
+            <div class="7"></div>
+          </div>
+        </div>
+        <div class="8">
+          <div class="9"></div>
+        </div>
+      </div>
+      <div class="10"></div>
+    </div>
+    <div class="11">
+      <div class="12"></div>
+      <div class="13">
+        <div class="14"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function bfs(node, handler) {
+      let queue = []
+      queue.push(node)
+      node.color = 'black'
+
+      while (queue.length) {
+        let queueItem = queue.pop()
+        handler(queueItem.className)
+        for (let i = 0; i < queueItem.children.length; i++) {
+          if (queueItem.children[i].color !== 'black') {
+            queue.unshift(queueItem.children[i])
+            queueItem.children[i].color = 'black'
+          }
+        }
+      }
+    }
+
+    function dfs(node, handler) {
+      if (node) {
+        handler(node.className)
+        for (let i = 0; i < node.children.length; i++) {
+          dfs(node.children[i], handler)
+        }
+      }
+    }
+    dfs(document.querySelector('div'), (val) => {
+      console.log(val);
+    })
+  </script>
+</body>
+
+</html>

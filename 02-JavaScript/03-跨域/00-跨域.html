@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 文章链接:https://segmentfault.com/a/1190000011145364 -->
+  <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script>
+    // 同源策略:协议+域名+端口号
+    // 同源策略限制以下几种行为:
+    // 1) Cookie,LocalStorage,IndexxDB无法获取
+    // 2) DOM和JS对象无法获得
+    // 3) AJAX请求不能发送
+
+
+    // 解决方案:
+    // 1.JSONP跨域:
+    // 缺点:只能实现一种get请求
+
+    // 1.1 原生: 
+    // function handleCallback(params) {
+    //   console.log(JSON.stringify(params));
+    // }
+
+    // let script = document.createElement('script')
+    // script.type = 'text/javascript'
+    // script.src = 'http://www.localhost:8080/login?username=cuifan&age=20&callback=handleCallback'
+    // document.body.append(script)
+
+    // 1.2 jquery
+    // $.ajax({
+    //   url: 'http://www.localhost:8080/login',
+    //   type: 'get',
+    //   dataType: 'jsonp', // 请求方式为JSONP
+    //   jsonpCallback: 'handleCallback',
+    //   data: {
+    //     username: 'cuifan',
+    //     age: 20
+    //   }
+    // })
+
+    // 1.3 vue.js
+    // this.$http.jsonp('http://www.localhost:8080/login', {
+    //   params: {},
+    //   jsonp: 'handleCallback'
+    // }).then((res) => {
+    //   console.log(res);
+    // })
+
+    // 2.document.domain+iframe跨域
+    // 缺点:仅适用于主域相同,子域不同的情况跨域
+
+    // 3.location.hash+iframe
+
+    // a->b->c (c和a同域)
+    // a页面通过改变iframe的url中的hash值,在b页面可以用onhashchange监听到,然后把改变的url中的hash值加入到b页面中的
+    // iframe中的url,c中onhashchange监听到b中改变hash值,可以通过c中window.parent.parent来访问a中所有的对象
+
+    // 4.window.name + iframe
+  </script>
+</body>
+
+</html>

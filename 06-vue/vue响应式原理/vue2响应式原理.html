@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function defineReactive(obj, key, value) {
+      // 如果不传value，就让value等于默认值
+      value = value || obj[key]
+
+      // value如果是对象，则把对象的所有值再递归加入响应式系统（DFS）
+      observe(value)
+      Object.defineProperty(obj, key, {
+        get() {
+          return value
+        },
+        set(newValue) {
+          if (newValue !== value) {
+            // 把新值也加入响应式系统
+            observe(newValue)
+            value = newValue
+            console.log('更新视图');
+          }
+        }
+      })
+    }
+
+    // 把target对象加入响应式系统
+    function observe(target) {
+      if (typeof target !== 'object' || target === null) return target
+
+      // 如果是数组，重新设置原型
+      if (Array.isArray(target)) {
+        // 修改一个对象的原型可能会引起会引起严重的代码性能，会涉及到所有访问了那些修改过原型的对象的代码，通常建议使用Object.create()来新建一个
+        target.__proto__ = newArProto
+          // Object.setPrototypeOf(target, newArProto)
+      }
+
+      for (let key in target) {
+        defineReactive(target, key, target[key])
+      }
+    }
+
+    // 重写数据原型方法
+    const oldArrProto = Array.prototype
+    const newArProto = Object.create(oldArrProto);
+    ['push', 'unshift', 'pop', 'shift', 'slice', 'concat', 'splice'].forEach(methodName => {
+      newArProto[methodName] = function() {
+        console.log('更新视图');
+        return oldArrProto[methodName].call(this, ...arguments)
+      }
+    })
+
+    let data = {
+      name: 'cuifan',
+      age: 21,
+      friend: {
+        friend1: {
+          frined1: {
+            friendName: '小米'
+          }
+        }
+      },
+      colors: ['red', 'blue', 'orange']
+    }
+
+    // 把data对象中的数据加入响应式系统
+    observe(data)
+
+    // 数据发生变化去更新视图
+    // data.name = '崔帆'
+    // data.age++
+
+    // 复杂对象的情况
+    // data.friend.friend1.frined1.friendName = 'Jack'
+
+    // 如果新添加的数据也是对象
+    // data.age = {
+    //   number: 20
+    // }
+
+    // data.age.number = 21
+
+
+    // Vue2的响应式会一上来就深度监听所有data对象的数据，当页面数据过多的时候，可能会卡死，同时，删除数据和添加新的数据。视图不会发生更新。Object.defineProperty()没办法监听删除和添加新数据操作。只能使用Vue.set()和Vue.delete()来操作。
+
+    // 针对数组的操作
+    data.colors.push('black')
+
+    // data.colors[0] = 'purple'
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    [class^="container"] {
+      margin: 10px;
+      border: 1px solid #333;
+    }
+    
+    [class^="container"] .box {
+      float: left;
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      background-color: skyblue;
+    }
+    
+    .clearfix {
+      clear: both;
+    }
+    
+    .container1::after {
+      display: block;
+      height: 0;
+      content: '';
+      clear: both;
+    }
+    
+    .container2 {
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 参考文章：https://segmentfault.com/p/1210000011625576/read -->
+  <!-- 1.额外标签法 -->
+  <div class="container">
+    <div class="box">我是浮动的元素</div>
+    <div class="box">我是浮动的元素</div>
+    <div class="box">我是浮动的元素</div>
+    <div class="clearfix"></div>
+  </div>
+
+  <!-- 2. 利用伪元素 -->
+  <div class="container1">
+    <div class="box">我是浮动的元素</div>
+    <div class="box">我是浮动的元素</div>
+    <div class="box">我是浮动的元素</div>
+  </div>
+
+  <!-- 3. BFC -->
+  <div class="container2">
+    <div class="box">我是浮动的元素</div>
+    <div class="box">我是浮动的元素</div>
+    <div class="box">我是浮动的元素</div>
+  </div>
+</body>
+
+</html>

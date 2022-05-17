@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <template id="cuifan">
+    <style>
+      p {
+        color: aqua;
+      }
+    </style>
+    <h2>我是崔帆组件的标题</h2>
+    <p>我是崔帆组件的文字</p>
+    <script>
+      console.log('hello WebComponent!');
+    </script>
+</template>
+
+  <script>
+    class Cuifan extends HTMLElement {
+      constructor() {
+        super()
+
+        // 获取组件模板
+        const content = document.querySelector('#cuifan').content
+
+        // 创建影子DOM结点
+        const shadowDOM = this.attachShadow({
+          mode: 'open'
+        })
+
+        // 将模板添加到影子结点上
+        shadowDOM.appendChild(content.cloneNode(true))
+      }
+    }
+
+    customElements.define('cuifan-fan', Cuifan)
+  </script>
+  <cuifan-fan></cuifan-fan>
+  <h2>我是主页面</h2>
+</body>
+
+</html>

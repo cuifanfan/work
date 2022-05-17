@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    [class^="container"] {
+      width: 400px;
+      height: 400px;
+      /* padding: 20px; */
+      margin: 20px;
+      background-color: skyblue;
+    }
+    
+    [class^="box"] {
+      /* width: 100px;
+      height: 100px; */
+      margin: 10px;
+      padding: 10px;
+      background-color: greenyellow;
+    }
+    
+    .box1 {
+      display: inline;
+    }
+    
+    div.box2 {
+      display: inline-block;
+      margin: 10px 0;
+    }
+    
+    div.box3 {
+      display: block;
+      /* margin: 50px; */
+    }
+    
+    .container3 {
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- > 1. 行内元素：不能设置宽高（默认宽高是内容的宽高）、上下外边距【设置上padding时会遇到上padding溢出父盒子（看起来表现为上padding无效）】(auto)。不同行之间根据content换行 -->
+  <div class="container1">
+    <div class="box1">行内元素</div>
+    <div class="box1">行内元素</div>
+    <div class="box1">行内元素</div>
+    <div class="box1">行内元素</div>
+    <div class="box1">行内元素</div>
+  </div>
+
+  <!-- > 2. 行内块元素：可以设置宽高和内外边距（默认宽高是内容的宽高），不设置margin时相邻元素之间会有一条缝隙（这是由于html代码书写时元素之间的空白导致的）,不会和父盒子发生外边距重叠的问题 -->
+  <div class="container2">
+    <div class="box2">行内块元素</div>
+    <div class="box2">行内块元素</div>
+    <div class="box2">行内块元素</div>
+  </div>
+
+  <!-- 3.块级元素：可以设置宽高和内外边距（默认宽度是继承父盒子宽度，高度根据内容高度决定），会和父盒子出现外边距重叠 -->
+  <div class="container3">
+    <div class="box3">块级元素</div>
+    <div class="box3">块级元素</div>
+    <div class="box3">块级元素</div>
+  </div>
+</body>
+
+</html>

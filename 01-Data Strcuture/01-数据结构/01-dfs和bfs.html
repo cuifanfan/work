@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box1">
+    <div class="box2">
+      <div class="box3">
+        <div class="box4"></div>
+        <div class="box5">
+          <div class="box6"></div>
+        </div>
+      </div>
+      <div class="box7">
+        <div class="box8"></div>
+        <div class="box9"></div>
+      </div>
+    </div>
+    <div class="box10">
+      <div class="box11"></div>
+      <div class="box12"></div>
+    </div>
+    <div class="box13">
+      <div class="box14"></div>
+      <div class="box15"></div>
+    </div>
+  </div>
+  <script>
+    // // 广度优先
+    function bfs(element, callback) {
+      let arr = []
+      element.color = 'black'
+      arr.push(element)
+      while (arr.length) {
+        let div = arr.pop()
+        for (let i = 0; i < div.children.length; i++) {
+          if (div.children[i].color !== 'black') {
+            arr.unshift(div.children[i])
+            div.children[i].color = 'black'
+          }
+        }
+        callback && callback(div)
+      }
+    }
+
+
+    //深度优先
+    // function dfs(element, callback) {
+    //   // 先访问该结点
+    //   callback && callback(element)
+
+    //   for (let i = 0; i < element.children.length; i++) {
+    //     dfs(element.children[i], callback)
+    //   }
+    // }
+
+    function handle(div) {
+      console.log(div);
+    }
+    let divs = document.getElementsByTagName('div')
+
+
+    // dfs(divs[0], handle)
+    bfs(divs[0], handle)
+  </script>
+</body>
+
+</html>

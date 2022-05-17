@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{message}}</h2>
+    <my-cpn>
+      <template slot-scope="slotObj">
+        <p>我是替换插槽的内容</p>
+        <p>{{slotObj.data}}</p>
+      </template>
+    </my-cpn>
+  </div>
+  <template id="myCpn">
+    <div>
+      <h2>我是一个组件</h2>
+      <slot :data="movies">我是一个插槽</slot>
+    </div>
+  </template>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('my-cpn', {
+      template: '#myCpn',
+      data() {
+        return {
+          movies: ['星际穿越', '阿凡达', '星球大战']
+        }
+      }
+    })
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello vue'
+      }
+    })
+  </script>
+</body>
+
+</html>

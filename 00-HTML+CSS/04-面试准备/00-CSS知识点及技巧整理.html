@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 关于浮动的重叠问题： -->
+  <!-- 浮动元素在行内元素上：行内元素的边框、背景、内容都会显示在浮动元素之上 -->
+  <!-- 浮动元素在块级元素上：边框、背景会显示在浮动盒子下，内容会显示在浮动盒子上面 -->
+
+  <!-- 关于px、rem、em: -->
+  <!-- px是绝对单位、是相较于屏幕的分辨率而言的 -->
+  <!-- em:在子元素设置字体大小的时候，是相对于父元素的font-size。而在给height/width/padding/margin设置为em时候，是相对与当前元素的font-size  -->
+  <!-- rem:相对于根元素 -->
+
+  <!-- CSS引入方式有哪些：
+  （1）link是XHTML标签、除了加载CSS之外，还可以定义RSS等其他事务；@import属于CSS范畴，只能加载CSS
+  （2）link引用CSS时，在页面载入时同时加载；@import需要页面网页完全载入以后加载
+  （3）link是XHTML标签，没有兼容性问题；@import是CSS2.1提出的，低版本的浏览器不支持
+  （4）link支持JavaScript控制DOM去改变样式，@import不支持 -->
+
+
+  <!-- CSS隐藏元素的几种方式和区别： -->
+  <!-- (1) display:none 彻底消失，原本的位置会被其他元素占有。会导致浏览器的重排和重绘 ，无法触发点击事件-->
+  <!-- （2）元素消失后、其占据的位置依旧会保留。只会导致浏览器重绘而不会重排 ，无法触发点击事件-->
+  <!-- （3）opcity:0; 透明度为0的元素只是隐身了，仍然存在于页面之中，可以触发点击事件 -->
+
+  <!-- 消除图片底部空隙 -->
+  <!-- 图片块状化：无基线对齐 img{display:inline-block}  -->
+  <!-- 图片设置非基线对齐：img{vertical-align:bottom;} -->
+  <!-- 行高足够小-基线位置上移：.box{line-height:0} -->
+
+  <!-- 以后一定研究一下幽灵空白结点 -->
+
+  <!-- CSS流体布局：'宽度分离原则', CSS中的width不与影响宽度的padding/border共存，width独立占用一层标签。而padding、border、margin利用流动性在内部自适应呈现（父元素写死宽度、子元素只写padding、border） -->
+
+</body>
+
+</html>

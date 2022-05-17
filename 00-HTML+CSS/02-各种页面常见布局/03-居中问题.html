@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      display: table-cell;
+      vertical-align: middle;
+      width: 200px;
+      height: 200px;
+      text-align: center;
+      background-color: pink;
+    }
+    
+    .box {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background-color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- css书写顺序：
+  1.位置属性（display、position、float）
+  2.大小属性（width、height、padding、margin)
+  3.文本属性（font、color、line-height、text-align）
+  4.背景属性（background、border）
+  5.其他（animation、transition） -->
+
+  <!-- 设置为sticky的元素：在屏幕范围内偏移值不起作用，超过屏幕范围的时候，会变为fixed定位 -->
+  <div class="container">
+    <div class="box"></div>
+  </div>
+</body>
+
+</html>

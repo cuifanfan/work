@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <h2>{{message}}</h2> -->
+    <!-- <ul>
+      <li v-for="(item,index) in items">{{item}}-{{index}}</li>
+    </ul> -->
+    <h2>count:{{count}}</h2>
+    <button @click="add">+</button>
+    <button @click="sub">-</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let app = new Vue({
+      // el可以是一个DOM元素,也可以是一个字符串，然后会根据这个字符串去选择元素，这个元素指定的DOM元素，指定了vue之后管理哪一个元素
+      el: '#app',
+      data: {
+        // message: 'hello vue'
+        // items: ['星际穿越', '星球大战']
+        count: 0
+      },
+      methods: {
+        add() {
+          this.count++
+        },
+        sub() {
+          this.count--
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

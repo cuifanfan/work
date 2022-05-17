@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    div[class^="container"] {
+      width: 400px;
+      height: 400px;
+      margin: 10px;
+      /* text-align: center; */
+      background-color: skyblue;
+    }
+    
+    [class^="box"] {
+      width: 100px;
+      height: 100px;
+      background-color: greenyellow;
+    }
+    
+    .box1 {
+      display: inline-block;
+    }
+    
+    .box2 {
+      margin: 0 auto;
+    }
+    
+    .container3 {
+      position: relative;
+    }
+    
+    .box3 {
+      position: absolute;
+      left: 50%;
+      margin-left: -50px;
+    }
+    
+    [class^="cbox"] {
+      background-color: rgb(170, 255, 0);
+    }
+    
+    .cbox1 {
+      display: inline-block;
+    }
+    
+    .container5 {
+      display: flex;
+      justify-content: center;
+      /* 纵轴默认对齐方式stretch */
+      align-items: flex-start;
+    }
+    
+    .container6 {
+      position: relative;
+    }
+    
+    .cbox3 {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .cbox4 {
+      display: table;
+      margin: 0 auto;
+    }
+    
+    .container8 {
+      line-height: 400px;
+    }
+    
+    .box4 {
+      display: inline;
+    }
+    
+    .container9 {
+      position: relative;
+    }
+    
+    .box5 {
+      position: absolute;
+      top: 50%;
+      /* 1.知道高度 */
+      /* margin: -50px; */
+      /* 2.不知道高度 */
+      transform: translateY(-50%);
+    }
+    
+    .container10 {
+      display: flex;
+      align-items: center;
+    }
+    
+    .container11 {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 文章链接：https://mp.weixin.qq.com/s/lyJvwg1tdbJUJ9A1soGG-Q -->
+
+  <!-- 1. 水平居中 -->
+  <!-- 1.1 行内（块）元素 -->
+  <div class="container1">
+    <span class="box1">1.行内元素</span>
+  </div>
+
+  <!-- 1.2 确定宽度的块级元素 -->
+  <!-- （1） 使用margin: 0 auto;实现居中 -->
+  <div class="container2">
+    <div class="box2">2.确定宽度的块级元素</div>
+  </div>
+  <!-- （2）使用绝对定位 -->
+  <div class="container3">
+    <div class="box3">2.确定宽度的块级元素</div>
+  </div>
+
+  <!-- 1.3 未知宽度的块级盒子 -->
+  <!-- （1）转换为行内块元素：display:inline-block; -->
+  <div class="container4">
+    <div class="cbox1">3.未知宽度的块级盒子</div>
+  </div>
+  <!-- （2）使用flex布局 -->
+  <div class="container5">
+    <div class="cbox2">3.未知宽度的块级盒子</div>
+  </div>
+  <!-- （3）使用绝对定位+transform:translate平移 -->
+  <div class="container6">
+    <div class="cbox3">3.未知宽度的块级盒子</div>
+  </div>
+  <!-- （4） 使用table布局 -->
+  <div class="container7">
+    <div class="cbox4">3.未知宽度的块级盒子</div>
+  </div>
+
+
+  <!-- 2. 垂直居中 -->
+  <!-- 2.1 行内（块）元素[适合于纯文字类](忽略了font-size在这里带来的影响) -->
+  <div class="container8">
+    <div class="box4">1.行内元素</div>
+  </div>
+
+  <!-- 2.2 利用定位 -->
+  <div class="container9">
+    <div class="box5">2.定位垂直居中</div>
+  </div>
+
+  <!-- 2.3 使用flex布局 -->
+  <div class="container10">
+    <div class="box6">3.flex垂直居中</div>
+  </div>
+
+  <!-- 2.4 使用table单元格布局  -->
+  <div class="container11">
+    <div class="box7">4.table单元格</div>
+  </div>
+</body>
+
+</html>

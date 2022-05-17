@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .outer {
+      display: flex;
+      align-items: center;
+      margin: 0 10px;
+      height: 100vh;
+    }
+    
+    .inner {
+      position: relative;
+      flex: 1;
+      height: 0;
+      padding-bottom: 50%;
+      background-color: pink;
+    }
+    
+    .box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- padding和margin设置百分比是相对于父元素的width值。 父元素的width是content区域,标准盒模型不含border和padding(content-box),IE盒模型包含border和padding(border-box)[宽高设置百分比同理] -->
+  <div class="outer">
+    <div class="inner">
+      <div class="box">A</div>
+    </div>
+  </div>
+</body>
+
+</html>

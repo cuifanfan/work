@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .header {
+      width: 50%;
+      padding: 25px 0;
+      background-color: red;
+    }
+    
+    .sticky {
+      position: fixed;
+      top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="height: 200px;"></div>
+  <div class="header"></div>
+  <div style="height: 2000px;"></div>
+  <script>
+    let header = document.getElementsByClassName('header')[0]
+    let headerTop = header.getBoundingClientRect().top
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > headerTop) {
+        header.classList.add('sticky')
+      } else {
+        header.classList.remove('sticky')
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{message}}</h2>
+    <fa-cpn>
+    </fa-cpn>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type="text/x-template" id="chCpn">
+    <div>
+      <h2>{{message}}</h2>
+      <p>我是子组件中的一个段落内容</p>
+      <p>父组件传来的信息:
+        <<<{{fa_message}}>>> </p>
+      <button @click="sendMessage">向父组件传递信息</button>
+      <button @click="showFather">显示父组件</button>
+    </div>
+  </script>
+  <template id="faCpn">
+    <div>
+      <h2>{{message}}</h2>
+      <p>我是组件中的一个段落内容</p>
+      <p>子组件传来的信息:<<<<{{sonMessage}}>>>></p>
+      <button @click="showSon">显示子组件</button>
+      <ch-cpn ref="2" :fa_message="message" @sonmessage="handleMessage"></ch-cpn>
+    </div> 
+  </template>
+  <script>
+    // 创建组件构造器
+    // const myComponent = Vue.extend({
+    //     // 自定义组件的模板
+    //     template: `<div>
+    //       <h2>组件标题</h2>
+    //       <p>我是组件中的一个段落内容</p>
+    //       </div> `
+    //   })
+    // 注册组件
+    // Vue.component('my-cpn', {
+    //   // 自定义组件的模板
+    //   template: `<div>
+    //       <h2>组件标题</h2>
+    //       <p>我是组件中的一个段落内容</p>
+    //       </div> `
+    // })
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello vue'
+      },
+      components: {
+        faCpn: {
+          // 自定义组件的模板
+          template: `#faCpn`,
+          data() {
+            return {
+              message: '我是父组件',
+              sonMessage: ''
+            }
+          },
+          methods: {
+            handleMessage(value) {
+              console.log('父组件收到了子组件的信息:' + value)
+              this.sonMessage = value
+            },
+            showSon() {
+              console.log(this.$refs);
+              console.log(this.$children);
+            }
+          },
+          components: {
+            chCpn: {
+              template: '#chCpn',
+              data() {
+                return {
+                  message: '我是子组件'
+                }
+              },
+              // props: ['famessage']
+              props: {
+                // fa_message: String,
+                // fa_message: [String, Number],
+                fa_message: {
+                  type: String,
+                  // required: true,
+                  // default: '父组件没传'
+                  // default () {
+                  //   return {
+                  //     uname: '父组件没传递对象'
+                  //   }
+                  // }
+                  validator(value) {
+                    return value === '我是父组件'
+                  }
+                }
+              },
+              methods: {
+                sendMessage() {
+                  this.$emit('sonmessage', this.message)
+                },
+                showFather() {
+                  console.log(this.$parent)
+                }
+              }
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
