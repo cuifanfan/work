@@ -11,9 +11,10 @@
     Hello World!
   </div>
   <script>
-    window.onload = function() {
+    window.onload = function () {
+
       var messageEle = document.getElementById('message');
-      window.addEventListener('message', function(e) {
+      window.addEventListener('message', function (e) {
         alert(e.origin);
         if (e.origin !== "http://www.42du.cn") {
           return;

@@ -1,5 +1,8 @@
 console.log(['0', '0', '0'].map(str => parseInt(str)));
 console.log(['1', '0', '1'].map(Number));
+function (params) {
+    
+}
 
 // map把(value,index)传递给parseInt
 // ('0', 0), ('0', 1), ('0', 2)

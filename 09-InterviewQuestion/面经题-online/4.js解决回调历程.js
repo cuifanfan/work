@@ -15,7 +15,7 @@
 // (1)回调函数延迟执行
 // (2)返回值穿透
 // (3)异常冒泡
-// 实现链式调用解决了回调嵌套的问题,实现错误冒泡后一站式处理. 
+// 实现链式调用解决了回调嵌套的问题,实现错误冒泡后一站式处理.
 // 实现错误冒泡解决了海马错误混乱的的问题
 
 // 为什么引入微任务?
@@ -39,21 +39,22 @@
 // a++
 // console.log('1', a)
 
-Promise.prototype.myFinally = function(callback) {
-  return this.then(value => Promise.resolve(callback()).then(() => value),
-    error => Promise.resolve(callback).then(() => error)
-  )
-}
+Promise.prototype.myFinally = function (callback) {
+  return this.then(
+    (value) => Promise.resolve(callback()).then(() => value),
+    (error) => Promise.resolve(callback).then(() => error)
+  );
+};
 
 let p = new Promise((resolve) => {
-  setTimeout(resolve, 2000, 'myFinally')
-})
+  setTimeout(resolve, 2000, 'myFinally');
+});
 
-p.myFinally(function() {
+p.myFinally(function () {
   console.log('myFinally');
-}).then(value => {
+}).then((value) => {
   console.log('then', value);
-})
+});
 
 // p.then(val => {
 //   console.log('then', val);

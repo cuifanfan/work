@@ -12,24 +12,24 @@
       grid-template-columns: repeat(3, 120px);
       grid-template-rows: 100px 100px;
       grid-gap: 10px;
-      grid-template-areas: ". content content " "sidebar header header";
+      grid-template-areas: ". content content ""sidebar header header";
     }
-    
+
     .box1 {
       background-color: greenyellow;
       grid-area: content;
     }
-    
+
     .box2 {
       background-color: skyblue;
       grid-area: sidebar;
     }
-    
+
     .box3 {
       background-color: red;
       grid-area: header;
     }
-    
+
     [class^="box"] {
       text-align: center;
       font-size: 200%;
